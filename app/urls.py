@@ -1,0 +1,45 @@
+"""
+URL configuration for app project.
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/5.2/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.contrib import admin
+from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
+#from cars.views import car_views5, car_list, new_car_view
+from cars.views import CarsView, NewCarView, CarsListView, NewCarCreateView, CarDetailView, CarUpdateView, CarDeleteView
+from accounts.views import register_view, login_view, logout_view
+
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    # path('cars1/', car_views1),
+    # path('cars2/', car_views2),
+    # path('cars3/', car_views3),
+    # path('cars4/', car_views4),
+    #path('cars5/', car_views5),
+    #path('car_list/', car_list, name='car_list'),
+    #path('new_car/', new_car_view, name='new_car'),
+    #path('cars/', CarsView.as_view(), name='car_list'),
+    #path('new_car/', NewCarView.as_view(), name='new_car'),
+    path('cars/', CarsListView.as_view(), name='cars'),
+    path('new_car/', NewCarCreateView.as_view(), name='new_car'),
+    path('car/<int:pk>/', CarDetailView.as_view(), name='car_detail'),
+    path('car/<int:pk>/update/', CarUpdateView.as_view(), name='car_update'),
+    path('car/<int:pk>/delete/', CarDeleteView.as_view(), name='car_delete'),
+    path('register/', register_view, name='register'),
+    path('login/', login_view, name='login'),
+    path('logout/', logout_view, name='logout'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

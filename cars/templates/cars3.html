@@ -1,0 +1,13 @@
+<html>
+    <head>
+        <title>Meus carros</title>
+    </head>
+    {% block content %}
+        <body>
+            <h1>Carros da Templates usando a ORM</h1>
+            {% for car in cars %}
+            <h3>Carro: {{ car.model }} - {{ car.brand }} ({{ car.factory_year }})</h3>
+            {% endfor %}
+        </body>
+    {% endblock  %}
+</html>
